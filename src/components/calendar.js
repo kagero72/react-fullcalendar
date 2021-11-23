@@ -16,7 +16,7 @@ const Calendar = (props) => {
     }
   }, [])
   
-  const GetVacantInfo = (code, date) => {
+  const getVacantInfo = (code, date) => {
     let vacantTypes = [
       {
         title: '空',
@@ -51,7 +51,7 @@ const Calendar = (props) => {
   for(let i = 0; i < 180; i++){
     let day = new Date()
     day.setDate( day.getDate() + 1 + i)
-    reservations.push(GetVacantInfo(vacancyCodes[i], day))
+    reservations.push(getVacantInfo(vacancyCodes[i], day))
   }
 
   return(
