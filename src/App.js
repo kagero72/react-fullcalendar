@@ -7,8 +7,6 @@ import Calendar from "./components/calendar";
 import InfoForm from "./components/infoform";
 import Confirm from "./components/confirm";
 
-export const reserveInfo = React.createContext()
-
 function App() {
 
   const [page, setPage] = useState(0);
