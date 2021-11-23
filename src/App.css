@@ -36,3 +36,130 @@
     transform: rotate(360deg);
   }
 }
+
+main{
+  margin: auto;
+  padding: auto;
+  width: 70%;
+}
+
+.ta-l{
+  text-align: left;
+}
+
+.tc-r{
+  color:red;
+}
+
+table {
+  border-color: white;
+}
+.fc-theme-standard td {
+  border: 1px solid white;
+}
+.fc-theme-standard th {
+  border: 1px solid white;
+}
+.fc-theme-standard .fc-scrollgrid {
+  border: 1px solid white;
+}
+
+/* .fc-daygrid-day-events {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+} */
+.fc-daygrid-event {
+  color: #FFF !important;
+  padding: 7px 18px;
+  line-height: 1;
+  border-radius: 28px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.fc .fc-daygrid-day-top {
+  justify-content: center;
+}
+.fc .fc-daygrid-day-bottom {
+  padding: 0;
+}
+
+.fc-day {
+  background-color: #efefef;
+}
+.fc-day-sat {
+  background-color: #c1e4e9;
+}
+.fc-day-sun {
+  background-color: #f6bfbc;
+}
+
+.fc-day > .fc-daygrid-day-frame > .fc-daygrid-day-top > .fc-daygrid-day-number {
+  color: #444;
+}
+.fc-day-sat > .fc-daygrid-day-frame > .fc-daygrid-day-top > .fc-daygrid-day-number {
+  color: #3498db;
+}
+.fc-day-sun > .fc-daygrid-day-frame > .fc-daygrid-day-top > .fc-daygrid-day-number {
+  color: #e74c3c;
+}
+
+.fc-day > .fc-scrollgrid-sync-inner > .fc-col-header-cell-cushion {
+  color: #444;
+}
+.fc-day-sat > .fc-scrollgrid-sync-inner > .fc-col-header-cell-cushion {
+  color: #3498db;
+}
+.fc-day-sun > .fc-scrollgrid-sync-inner > .fc-col-header-cell-cushion {
+  color: #e74c3c;
+}
+
+.fc-daygrid-day-number {
+  color: #555555;
+  text-decoration: solid;
+}
+.fc-col-header-cell-cushion {
+  color: #555555;
+  text-decoration: solid;
+}
+
+.fc-event-title {
+  text-align: center;
+}
+
+.fc-view-harness {
+  border: 0;
+}
+
+.form-label{
+  font-size: large;
+  vertical-align: middle;
+  margin-bottom: 0px;
+}
+
+.form-control.bg-white{
+  background-color: #ffffff;
+}
+
+.form-control.bg-green{
+  background-color: #ddffdd;
+}
+
+.bg-green{
+  background-color: #ddffdd;
+}
+
+.back-button{
+  float: right;
+}
+
+.block{
+  display: block;
+}
+
+.none{
+  display: none;
+}
