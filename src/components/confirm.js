@@ -1,7 +1,6 @@
 import { Container, Button, ButtonGroup, ListGroup } from 'react-bootstrap';
 
 const Confirm = (props) => {
-  console.log(props)
 
   const onSubmit = () => {
 

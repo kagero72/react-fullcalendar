@@ -1,8 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css";
 
-import React, { useState, useEffect, useCallback, useContext } from "react";
-import { Accordion } from "react-bootstrap";
+import React, { useState } from "react";
 
 import Calendar from "./components/calendar";
 import InfoForm from "./components/infoform";
@@ -87,16 +86,6 @@ function App() {
     "沖縄県"
   ]
 
-  // const {info, setInfo} = useContext(reserveInfo);
-  // const [time, setTime] = useState();
-  // const [people, setPeople] = useState();
-  // const [prefecture, setPrefecture] = useState();
-  // const [name, setName] = useState();
-  // const [furigana, setFurigana] = useState();
-  // const [tel, setTel] = useState();
-  // const [email, setEmail] = useState();
-
-
   const SelectDate = (date) => { 
     console.log("selectDate")
     setDate(date)
@@ -108,12 +97,6 @@ function App() {
     SetPage(2)
 
     console.log(info.furigana)
-  }
-
-  const SetDate = (date) => {
-    setInfo({info: { date: date }})
-    // console.log(date)
-    // console.log(this.date)
   }
 
   const SetPage = (page) => {
