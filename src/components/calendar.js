@@ -36,9 +36,9 @@ const Calendar = (props) => {
     ]
 
     let vacantInfo = vacantTypes[code]
-    if(vacantInfo) vacantInfo.start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    if(vacantInfo) vacantInfo.start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
 
-    return vacantInfo;
+    return vacantInfo
   }
 
   // 仮のランダムな予約

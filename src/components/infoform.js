@@ -3,53 +3,52 @@ import { Button, Container, Row, Col, Form, FloatingLabel, FormControl } from 'r
 
 const InfoForm = (props) => {
 
-  const [time, setTime] = useState(0);
-  const [people, setPeople] = useState([0,0,0,0,0,0]);
-  const [peopleSum, setPeopleSum] = useState(0);
-  const [prefecture, setPrefecture] = useState(0);
-  const [name, setName] = useState("");
-  const [furigana, setFurigana] = useState("");
-  const [tel, setTel] = useState("");
-  const [email, setEmail] = useState("");
+  const [time, setTime] = useState(0)
+  const [people, setPeople] = useState([0,0,0,0,0,0])
+  const [peopleSum, setPeopleSum] = useState(0)
+  const [prefecture, setPrefecture] = useState(0)
+  const [name, setName] = useState("")
+  const [furigana, setFurigana] = useState("")
+  const [tel, setTel] = useState("")
+  const [email, setEmail] = useState("")
 
   
   const onChangeTime = (event) => {
-    const value = event.target.value;
-    setTime(Number(value));
+    const value = event.target.value
+    setTime(Number(value))
   }
   const onChangePeople = (event, index) => {
-    const value = event.target.value;
-    let tmp = people;
-    tmp[index] = Number(value);
-    setPeople(tmp);
+    const value = event.target.value
+    let tmp = people
+    tmp[index] = Number(value)
+    setPeople(tmp)
     updatePeopleSum()
   }
   const onChangePreference = (event) => {
-    const value = event.target.value;
-    setPrefecture(Number(value));
+    const value = event.target.value
+    setPrefecture(Number(value))
   }
   const onChangeName = (event) => {
-    const value = event.target.value;
-    setName(value);
+    const value = event.target.value
+    setName(value)
   }
   const onChangeFurigana = (event) => {
-    const value = event.target.value;
-    console.log(furigana)
-    setFurigana(value);
+    const value = event.target.value
+    setFurigana(value)
   }
   const onChangeTel = (event) => {
-    const value = event.target.value;
-    setTel(value);
+    const value = event.target.value
+    setTel(value)
   }
   const onChangeEmail = (event) => {
-    const value = event.target.value;
-    setEmail(value);
+    const value = event.target.value
+    setEmail(value)
   }
   
   const updatePeopleSum = () => {
     let sum = 0;
     people.forEach(value => sum += value)
-    setPeopleSum(sum);
+    setPeopleSum(sum)
   }
 
   const getIsPeopleOver = () => {
@@ -87,7 +86,7 @@ const InfoForm = (props) => {
 
         <Form>
           <Form.Label className="mt-3 mb-2">
-            時間情報
+            時間
           </Form.Label><br/>
           <>{props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}</>
           <FloatingLabel label="時間帯" className="mb-2">
@@ -105,7 +104,7 @@ const InfoForm = (props) => {
           </FloatingLabel>
 
           <Form.Label className="mt-3 mb-2">
-            人数情報
+            人数
           </Form.Label>
           <Row>
             {
