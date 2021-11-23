@@ -29,8 +29,8 @@ const Confirm = (props) => {
         </ListGroup>
         <br/>
         <ButtonGroup>
-          <Button variant="primary" size="md" onClick={onSubmit}>確認</Button>
-          <Button variant="secondary" size="md" onClick={()=>props.setPage(1)}>変更</Button>
+          <Button variant="primary" size="lg" onClick={onSubmit}>確認</Button>
+          <Button variant="secondary" size="lg" onClick={()=>props.setPage(1)}>変更</Button>
         </ButtonGroup>
       </Container>
     </>
