@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Container, Row, Col, Form, FloatingLabel, FormControl } from 'react-bootstrap';
 
-const Infoform = (props) => {
+const InfoForm = (props) => {
 
   const [time, setTime] = useState(0);
   const [people, setPeople] = useState([0,0,0,0,0,0]);
@@ -201,4 +201,4 @@ const Infoform = (props) => {
   );
 }
 
-export default Infoform;
+export default InfoForm;

@@ -5,7 +5,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 import { Accordion } from "react-bootstrap";
 
 import Calendar from "./components/calendar";
-import Infoform from "./components/infoform";
+import InfoForm from "./components/infoform";
 import Confirm from "./components/confirm";
 
 export const reserveInfo = React.createContext()
@@ -126,7 +126,7 @@ function App() {
           <Calendar selectDate={SelectDate}></Calendar>
         </div>
         <div className={page === 1 ? "block" : "none"}>
-          <Infoform date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} goConfirm={GoConfirm}></Infoform>
+          <InfoForm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} goConfirm={GoConfirm}></InfoForm>
         </div>
         <div className={page === 2 ? "block" : "none"}>
           <Confirm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>
