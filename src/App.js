@@ -85,7 +85,6 @@ function App() {
   ]
 
   const SelectDate = (date) => { 
-    console.log("selectDate")
     setDate(date)
     SetPage(1)
   }

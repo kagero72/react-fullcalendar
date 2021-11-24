@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Container, Row, Col, Form, FloatingLabel, FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel, FormControl } from 'react-bootstrap';
 
 const InfoForm = (props) => {
 
@@ -72,6 +72,37 @@ const InfoForm = (props) => {
     props.goConfirm(info)
   }
 
+  const onReset = () => {
+    const timeSelect = document.getElementById("time-select")
+    timeSelect.value = 0
+    setTime(0)
+
+    const peopleSelectList = document.getElementsByClassName("people-select")
+    for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
+    setPeople([0,0,0,0,0,0])
+    setPeopleSum(0)
+
+    const nameControl = document.getElementById("name-control")
+    nameControl.value = ""
+    setName("")
+
+    const furiganaControl = document.getElementById("furigana-control")
+    furiganaControl.value = ""
+    setFurigana("")
+
+    const prefectureSelect = document.getElementById("prefecture-select")
+    prefectureSelect.value = 0
+    setPrefecture(0)
+
+    const telControl = document.getElementById("tel-control")
+    telControl.value = ""
+    setTel("")
+
+    const emailControl = document.getElementById("email-control")
+    emailControl.value = ""
+    setEmail("")
+  }
+
   return(
     <>
       <Container>
@@ -91,6 +122,7 @@ const InfoForm = (props) => {
           <>{props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}</>
           <FloatingLabel label="時間帯" className="mb-2">
             <Form.Select
+              id="time-select"
               className={"time-select " + (time === 0 ? "bg-white" : "bg-green")}
               onChange={event => onChangeTime(event)}
               placeholder="time"
@@ -140,6 +172,7 @@ const InfoForm = (props) => {
           <FloatingLabel label="お名前" className="mb-2">
             <Form.Control
               type="text"
+              id="name-control"
               className={"name-control " + (name === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeName(event)}
               placeholder="name"
@@ -148,6 +181,7 @@ const InfoForm = (props) => {
           <FloatingLabel label="ふりがな" className="mb-2">
             <FormControl
               type="text"
+              id="furigana-control"
               className={"furigana-control " + (furigana === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeFurigana(event)}
               placeholder="furigana"
@@ -155,6 +189,7 @@ const InfoForm = (props) => {
           </FloatingLabel>
           <FloatingLabel label="お住まいの都道府県" className="mb-2">
             <Form.Select
+              id="prefecture-select"
               className={"prefecture-select " + (prefecture === 0 ? "bg-white" : "bg-green")}
               onChange={event => onChangePreference(event)}
               placeholder="prefecture"
@@ -168,6 +203,7 @@ const InfoForm = (props) => {
           </FloatingLabel>
           <FloatingLabel label="お電話番号" className="mb-2">
             <Form.Control
+              id="tel-control"
               type="tel"
               className={"tel-control " + (tel === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeTel(event)}
@@ -176,22 +212,32 @@ const InfoForm = (props) => {
           </FloatingLabel>
           <FloatingLabel label="メールアドレス" className="mb-2">
             <Form.Control
+              id="email-control"
               type="email"
               className={"email-control " + (email === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeEmail(event)}
               placeholder="email"
             />
           </FloatingLabel>
-
-          <Button
-            variant="primary"
-            size="lg"
-            className="m-2"
-            onClick={onSubmit}
-            disabled={time === 0 || peopleSum === 0 || name === "" || furigana === "" || prefecture === 0 || tel === "" || email === "" || getIsPeopleOver() || getIsOnlyChild()}
-          >
-            確認画面へ
-          </Button><br/>
+          
+          <ButtonGroup className="mt-2 mb-2">
+            <Button
+              variant="primary"
+              size="lg"
+              onClick={onSubmit}
+              disabled={time === 0 || peopleSum === 0 || name === "" || furigana === "" || prefecture === 0 || tel === "" || email === "" || getIsPeopleOver() || getIsOnlyChild()}
+              >
+              確認画面へ
+            </Button>
+            <Button
+              variant="secondary"
+              size="md"
+              onClick={onReset}
+              >
+              入力内容をリセット
+            </Button>
+          </ButtonGroup>
+          <br/>
 
           <a href="#" className="m-2">会員登録済みの方はこちら</a>
         </Form>
