@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel, FormCont
 const InfoForm = (props) => {
 
   const [time, setTime] = useState(0)
-  const [people, setPeople] = useState([])
+  const [people, setPeople] = useState([0,0,0,0,0,0])
   const [peopleSum, setPeopleSum] = useState(0)
   const [prefecture, setPrefecture] = useState(0)
   const [name, setName] = useState("")
@@ -83,7 +83,7 @@ const InfoForm = (props) => {
 
     const peopleSelectList = document.getElementsByClassName("people-select")
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
-    setPeople([])
+    setPeople([0,0,0,0,0,0])
     setPeopleSum(0)
 
     const nameControl = document.getElementById("name-control")
@@ -148,7 +148,7 @@ const InfoForm = (props) => {
                 <>
                   <FloatingLabel key={index} label={value} as={Col} sm={4} className="mb-2">
                     <Form.Select
-                      className={"people-select " + ((people.length <= index || people[index] === 0) ? "bg-white" : "bg-green")}
+                      className={"people-select " + (people[index] === 0 ? "bg-white" : "bg-green")}
                       onChange={event => onChangePeople(event, index)}
                     >
                       {
