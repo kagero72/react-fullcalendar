@@ -74,10 +74,10 @@ const InfoForm = (props) => {
 
   const onReset = () => {
 
+    // リセット確認
     if(!window.confirm("本当に入力内容をリセットしますか？")) return
 
-    const timeSelect = document.getElementById("time-select")
-    timeSelect.value = 0
+    const timeSelect = document.getElementById("time-select").value = 0
     setTime(0)
 
     const peopleSelectList = document.getElementsByClassName("people-select")
@@ -85,24 +85,19 @@ const InfoForm = (props) => {
     setPeople([0,0,0,0,0,0])
     setPeopleSum(0)
 
-    const nameControl = document.getElementById("name-control")
-    nameControl.value = ""
+    const nameControl = document.getElementById("name-control").value = ""
     setName("")
 
-    const furiganaControl = document.getElementById("furigana-control")
-    furiganaControl.value = ""
+    const furiganaControl = document.getElementById("furigana-control").value = ""
     setFurigana("")
 
-    const prefectureSelect = document.getElementById("prefecture-select")
-    prefectureSelect.value = 0
+    const prefectureSelect = document.getElementById("prefecture-select").value = 0
     setPrefecture(0)
 
-    const telControl = document.getElementById("tel-control")
-    telControl.value = ""
+    const telControl = document.getElementById("tel-control").value = ""
     setTel("")
 
-    const emailControl = document.getElementById("email-control")
-    emailControl.value = ""
+    const emailControl = document.getElementById("email-control").value = ""
     setEmail("")
   }
 
