@@ -73,6 +73,9 @@ const InfoForm = (props) => {
   }
 
   const onReset = () => {
+
+    if(!window.confirm("本当に入力内容をリセットしますか？")) return
+
     const timeSelect = document.getElementById("time-select")
     timeSelect.value = 0
     setTime(0)
