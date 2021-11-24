@@ -15,7 +15,7 @@ const Confirm = (props) => {
           <ListGroup.Item>人数：　　　　　　
             {
               props.ageList.map((value, index) => 
-                props.info.people[index] !== 0 &&
+                (props.info.people.length > index && props.info.people[index] !== 0) &&
                 <>{value} {props.info.people[index]}名　</>
               )
             }
