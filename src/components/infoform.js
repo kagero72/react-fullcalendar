@@ -116,7 +116,7 @@ const InfoForm = (props) => {
          className="back-button"
          variant="outline-secondary"
          size="sm"
-         onClick={()=>props.setPage(0)}
+         onClick={()=>props.setPage('')}
         >
           日付選択へ
         </Button>

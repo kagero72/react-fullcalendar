@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css";
 
 import React, { useState } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
 
 import Calendar from "./components/calendar";
 import InfoForm from "./components/infoform";
@@ -9,8 +10,10 @@ import Confirm from "./components/confirm";
 
 function App() {
 
-  const [page, setPage] = useState(0);
-  const [date, setDate] = useState(new Date());
+  const [page, setPage] = useState(0)
+  const [date, setDate] = useState(new Date())
+
+  const navigate = useNavigate();
 
   const [info, setInfo] = useState({
     date: new Date(),
@@ -86,31 +89,36 @@ function App() {
 
   const SelectDate = (date) => { 
     setDate(date)
-    SetPage(1)
+    SetPage('infoform')
   }
 
   const GoConfirm = (info) => {
     setInfo(info)
-    SetPage(2)
+    SetPage('confirm')
 
     console.log(info.furigana)
   }
 
   const SetPage = (page) => {
-    setPage(page)
+    navigate('/' + page)
   }
 
   return (
     <>
-        <div className={page === 0 ? "block" : "none"}>
-          <Calendar selectDate={SelectDate}></Calendar>
-        </div>
-        <div className={page === 1 ? "block" : "none"}>
-          <InfoForm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} goConfirm={GoConfirm}></InfoForm>
-        </div>
-        <div className={page === 2 ? "block" : "none"}>
-          <Confirm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>
-        </div>
+      <Routes>
+        <Route
+          path="/"
+          element={<Calendar selectDate={SelectDate}></Calendar>}
+        />
+        <Route
+          path="/infoform"
+          element={<InfoForm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} goConfirm={GoConfirm}></InfoForm>}
+        />
+        <Route
+          path="/confirm"
+          element={<Confirm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>}
+        />
+      </Routes>
     </>
   );
 }
