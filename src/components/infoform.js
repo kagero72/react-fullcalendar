@@ -12,6 +12,7 @@ const InfoForm = (props) => {
   const [tel, setTel] = useState("")
   const [email, setEmail] = useState("")
 
+  // const time = () => { return Number(document.getElementById("time-select").value) }
   
   const onChangeTime = (event) => {
     const value = event.target.value

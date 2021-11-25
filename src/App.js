@@ -10,10 +10,9 @@ import Confirm from "./components/confirm";
 
 function App() {
 
-  const [page, setPage] = useState(0)
-  const [date, setDate] = useState(new Date())
-
   const navigate = useNavigate();
+
+  const [date, setDate] = useState(new Date())
 
   const [info, setInfo] = useState({
     date: new Date(),
