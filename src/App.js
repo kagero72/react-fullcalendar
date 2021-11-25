@@ -95,8 +95,6 @@ function App() {
   const GoConfirm = (info) => {
     setInfo(info)
     SetPage('confirm')
-
-    console.log(info.furigana)
   }
 
   const SetPage = (page) => {
