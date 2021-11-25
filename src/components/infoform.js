@@ -228,7 +228,7 @@ const InfoForm = (props) => {
             />
           </FloatingLabel>
           
-          <ButtonGroup className="mt-2 mb-2">
+          <ButtonGroup className="mt-2 mb-2 back-button">
             <Button
               variant="primary"
               size="lg"
@@ -247,7 +247,7 @@ const InfoForm = (props) => {
           </ButtonGroup>
           <br/>
 
-          <a href="#" className="m-2">会員登録済みの方はこちら</a>
+          {/* <a href="#" className="m-2">会員登録済みの方はこちら</a> */}
         </Form>
       </Container>
     </>
