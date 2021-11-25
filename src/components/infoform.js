@@ -23,8 +23,6 @@ const InfoForm = (props) => {
     tmp[index] = Number(value)
     setPeople(tmp)
     updatePeopleSum()
-
-    console.log(people)
   }
   const onChangePreference = (event) => {
     const value = event.target.value
@@ -48,7 +46,7 @@ const InfoForm = (props) => {
   }
   
   const updatePeopleSum = () => {
-    let sum = 0;
+    let sum = 0
     people.forEach(value => sum += value)
     setPeopleSum(sum)
   }
