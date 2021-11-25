@@ -134,6 +134,7 @@ const InfoForm = (props) => {
               className={"time-select " + (time === 0 ? "bg-white" : "bg-green")}
               onChange={event => onChangeTime(event)}
               placeholder="time"
+              defaultValue={props.info.time}
             >
               {
                 props.timeZoneList.map((value, index) =>
@@ -154,6 +155,7 @@ const InfoForm = (props) => {
                     <Form.Select
                       className={"people-select " + ((index >= people.length || people[index] === 0 || people[index] === undefined) ? "bg-white" : "bg-green")}
                       onChange={event => onChangePeople(event, index)}
+                      defaultValue={props.info.people[index]}
                     >
                       {
                         [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].map((num, index) =>
@@ -184,15 +186,17 @@ const InfoForm = (props) => {
               className={"name-control " + (name === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeName(event)}
               placeholder="name"
+              defaultValue={props.info.name}
             />
           </FloatingLabel>
           <FloatingLabel label="ふりがな" className="mb-2">
-            <FormControl
+            <Form.Control
               type="text"
               id="furigana-control"
               className={"furigana-control " + (furigana === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeFurigana(event)}
               placeholder="furigana"
+              defaultValue={props.info.furigana}
             />
           </FloatingLabel>
           <FloatingLabel label="お住まいの都道府県" className="mb-2">
@@ -201,6 +205,7 @@ const InfoForm = (props) => {
               className={"prefecture-select " + (prefecture === 0 ? "bg-white" : "bg-green")}
               onChange={event => onChangePreference(event)}
               placeholder="prefecture"
+              defaultValue={props.info.prefecture}
             >
               {
                 props.prefectureList.map((value, index) =>
@@ -216,6 +221,7 @@ const InfoForm = (props) => {
               className={"tel-control " + (tel === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeTel(event)}
               placeholder="tel"
+              defaultValue={props.info.tel}
             />
           </FloatingLabel>
           <FloatingLabel label="メールアドレス" className="mb-2">
@@ -225,6 +231,7 @@ const InfoForm = (props) => {
               className={"email-control " + (email === "" ? "bg-white" : "bg-green")}
               onChange={event => onChangeEmail(event)}
               placeholder="email"
+              defaultValue={props.info.email}
             />
           </FloatingLabel>
           
