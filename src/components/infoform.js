@@ -4,7 +4,7 @@ import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel, FormCont
 const InfoForm = (props) => {
 
   const [time, setTime] = useState(0)
-  const [people, setPeople] = useState([0,0,0,0,0,0])
+  const [people, setPeople] = useState([])
   const [peopleSum, setPeopleSum] = useState(0)
   const [prefecture, setPrefecture] = useState(0)
   const [name, setName] = useState("")
@@ -23,6 +23,8 @@ const InfoForm = (props) => {
     tmp[index] = Number(value)
     setPeople(tmp)
     updatePeopleSum()
+
+    console.log(people)
   }
   const onChangePreference = (event) => {
     const value = event.target.value
@@ -56,7 +58,9 @@ const InfoForm = (props) => {
   }
 
   const getIsOnlyChild = () => {
-    return peopleSum > 0 && people[0] == 0 && people[1] == 0
+    return peopleSum > 0
+    && (people[0] === 0 || people[0] === undefined)
+    && (people[1] === 0 || people[1] === undefined)
   }
 
   const onSubmit = () => {
@@ -83,7 +87,7 @@ const InfoForm = (props) => {
 
     const peopleSelectList = document.getElementsByClassName("people-select")
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
-    setPeople([0,0,0,0,0,0])
+    setPeople([])
     setPeopleSum(0)
 
     const nameControl = document.getElementById("name-control")
@@ -123,7 +127,9 @@ const InfoForm = (props) => {
           <Form.Label className="mt-3 mb-2">
             時間
           </Form.Label><br/>
-          <>{props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}</>
+          <>
+            {props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}
+          </>
           <FloatingLabel label="時間帯" className="mb-2">
             <Form.Select
               id="time-select"
@@ -148,7 +154,7 @@ const InfoForm = (props) => {
                 <>
                   <FloatingLabel key={index} label={value} as={Col} sm={4} className="mb-2">
                     <Form.Select
-                      className={"people-select " + (people[index] === 0 ? "bg-white" : "bg-green")}
+                      className={"people-select " + ((index >= people.length || people[index] === 0 || people[index] === undefined) ? "bg-white" : "bg-green")}
                       onChange={event => onChangePeople(event, index)}
                     >
                       {
