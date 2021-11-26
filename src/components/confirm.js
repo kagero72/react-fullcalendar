@@ -11,20 +11,20 @@ const Confirm = (props) => {
       <Container>
         <ListGroup>
           <ListGroup.Item>日付：　　　　　　{props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}</ListGroup.Item>
-          <ListGroup.Item>時間：　　　　　　{props.timeZoneList[props.info.time]}</ListGroup.Item>
-          <ListGroup.Item>人数：　　　　　　
+          <ListGroup.Item>時間：　　　　　　{props.info.時間帯}</ListGroup.Item>
+          {/* <ListGroup.Item>人数：　　　　　　
             {
               props.ageList.map((value, index) => 
                 (index < props.info.people.length && props.info.people[index] !== 0 && props.info.people[index] !== undefined) &&
                 <>{value} {props.info.people[index]}名　</>
               )
             }
-          </ListGroup.Item>
-          <ListGroup.Item>お名前：　　　　　{props.info.name}</ListGroup.Item>
-          <ListGroup.Item>ふりがな：　　　　{props.info.furigana}</ListGroup.Item>
-          <ListGroup.Item>都道府県：　　　　{props.prefectureList[props.info.prefecture]}</ListGroup.Item>
-          <ListGroup.Item>お電話番号：　　　{props.info.tel}</ListGroup.Item>
-          <ListGroup.Item>メールアドレス：　{props.info.email}</ListGroup.Item>
+          </ListGroup.Item> */}
+          <ListGroup.Item>お名前：　　　　　{props.info.お名前}</ListGroup.Item>
+          <ListGroup.Item>ふりがな：　　　　{props.info.ふりがな}</ListGroup.Item>
+          <ListGroup.Item>都道府県：　　　　{props.info.都道府県}</ListGroup.Item>
+          <ListGroup.Item>お電話番号：　　　{props.info.お電話番号}</ListGroup.Item>
+          <ListGroup.Item>メールアドレス：　{props.info.メールアドレス}</ListGroup.Item>
         </ListGroup>
         <br/>
         <ButtonGroup>
