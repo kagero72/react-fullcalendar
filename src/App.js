@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import React, { useState } from "react";
@@ -10,20 +10,18 @@ import Confirm from "./components/confirm";
 
 function App() {
 
-  const navigate = useNavigate();
-
-  const [date, setDate] = useState(new Date())
+  const navigate = useNavigate()
 
   const [info, setInfo] = useState({
     date: new Date(),
     time: 0,
-    people: [0,0,0,0,0,0],
+    people: [],
     prefecture: 0,
     name: "",
     furigana: "",
     tel: "",
     email: ""
-  });
+  })
 
   const timeZoneList = [
     "選択してください",
@@ -86,14 +84,8 @@ function App() {
     "沖縄県"
   ]
 
-  const SelectDate = (date) => { 
-    setDate(date)
-    SetPage('infoform')
-  }
-
-  const GoConfirm = (info) => {
-    setInfo(info)
-    SetPage('confirm')
+  const SetInfo = (item, value) => {
+    setInfo({ ...info, [item]: value })
   }
 
   const SetPage = (page) => {
@@ -105,19 +97,19 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={<Calendar selectDate={SelectDate}></Calendar>}
+          element={<Calendar setInfo={SetInfo} setPage={SetPage}></Calendar>}
         />
         <Route
           path="/infoform"
-          element={<InfoForm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} goConfirm={GoConfirm}></InfoForm>}
+          element={<InfoForm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={setInfo} setPage={SetPage}></InfoForm>}
         />
         <Route
           path="/confirm"
-          element={<Confirm date={date} info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>}
+          element={<Confirm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>}
         />
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

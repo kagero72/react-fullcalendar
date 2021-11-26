@@ -1,63 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel, FormControl } from 'react-bootstrap';
+import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel } from 'react-bootstrap';
 
 const InfoForm = (props) => {
 
-  const [time, setTime] = useState(0)
-  const [people, setPeople] = useState([])
   const [peopleSum, setPeopleSum] = useState(0)
-  const [prefecture, setPrefecture] = useState(0)
-  const [name, setName] = useState("")
-  const [furigana, setFurigana] = useState("")
-  const [tel, setTel] = useState("")
-  const [email, setEmail] = useState("")
 
   useEffect(() => {
-    setTime(props.info.time)
-    setPeople(props.info.people)
-    setPeopleSum(props.info.peopleSum)
-    setPrefecture(props.info.prefecture)
-    setName(props.info.name)
-    setFurigana(props.info.furigana)
-    setTel(props.info.tel)
-    setEmail(props.info.email)
-  }, []);
-  
-  const onChangeTime = (event) => {
-    const value = event.target.value
-    setTime(Number(value))
-  }
-  const onChangePeople = (event, index) => {
-    const value = event.target.value
-    let tmp = people
-    tmp[index] = Number(value)
-    setPeople(tmp)
     updatePeopleSum()
-  }
-  const onChangePreference = (event) => {
-    const value = event.target.value
-    setPrefecture(Number(value))
-  }
-  const onChangeName = (event) => {
-    const value = event.target.value
-    setName(value)
-  }
-  const onChangeFurigana = (event) => {
-    const value = event.target.value
-    setFurigana(value)
-  }
-  const onChangeTel = (event) => {
-    const value = event.target.value
-    setTel(value)
-  }
-  const onChangeEmail = (event) => {
-    const value = event.target.value
-    setEmail(value)
-  }
+  }, [props.info.people])
   
   const updatePeopleSum = () => {
     let sum = 0
-    people.forEach(value => sum += value)
+    props.info.people.forEach(value => sum += Number(value))
     setPeopleSum(sum)
   }
 
@@ -67,21 +21,12 @@ const InfoForm = (props) => {
 
   const getIsOnlyChild = () => {
     return peopleSum > 0
-    && (people[0] === 0 || people[0] === undefined)
-    && (people[1] === 0 || people[1] === undefined)
+    && (props.info.people[0] == 0 || props.info.people[0] === undefined)
+    && (props.info.people[1] == 0 || props.info.people[1] === undefined)
   }
 
   const onSubmit = () => {
-    let info = {
-      time: time,
-      people: people,
-      prefecture: prefecture,
-      name: name,
-      furigana: furigana,
-      tel: tel,
-      email: email
-    }
-    props.goConfirm(info)
+    props.setPage('confirm')
   }
 
   const onReset = () => {
@@ -89,34 +34,29 @@ const InfoForm = (props) => {
     // リセット確認
     if(!window.confirm("本当に入力内容をリセットしますか？")) return
 
-    const timeSelect = document.getElementById("time-select")
-    timeSelect.value = 0
-    setTime(0)
-
+    // フォーム内の値をリセット
+    document.getElementById("time-select").value = 0
     const peopleSelectList = document.getElementsByClassName("people-select")
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
-    setPeople([])
-    setPeopleSum(0)
+    document.getElementById("name-control").value = ""
+    document.getElementById("furigana-control").value = ""
+    document.getElementById("prefecture-select").value = 0
+    document.getElementById("tel-control").value = ""
+    document.getElementById("email-control").value = ""
 
-    const nameControl = document.getElementById("name-control")
-    nameControl.value = ""
-    setName("")
+    props.setAllInfo({
+      date: new Date(),
+      time: 0,
+      people: [],
+      prefecture: 0,
+      name: "",
+      furigana: "",
+      tel: "",
+      email: ""
+      }
+    )
 
-    const furiganaControl = document.getElementById("furigana-control")
-    furiganaControl.value = ""
-    setFurigana("")
-
-    const prefectureSelect = document.getElementById("prefecture-select")
-    prefectureSelect.value = 0
-    setPrefecture(0)
-
-    const telControl = document.getElementById("tel-control")
-    telControl.value = ""
-    setTel("")
-
-    const emailControl = document.getElementById("email-control")
-    emailControl.value = ""
-    setEmail("")
+    updatePeopleSum()
   }
 
   return(
@@ -136,13 +76,13 @@ const InfoForm = (props) => {
             時間
           </Form.Label><br/>
           <>
-            {props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}
+            {props.info.date.getFullYear() + "年" + (props.info.date.getMonth() + 1) + "月" + props.info.date.getDate() + "日"}
           </>
           <FloatingLabel label="時間帯" className="mb-2">
             <Form.Select
               id="time-select"
-              className={"time-select " + (time === 0 ? "bg-white" : "bg-green")}
-              onChange={event => onChangeTime(event)}
+              className={"time-select " + (props.info.time == 0 ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('time', event.target.value)}
               placeholder="time"
               defaultValue={props.info.time}
             >
@@ -163,8 +103,13 @@ const InfoForm = (props) => {
                 <>
                   <FloatingLabel key={index} label={value} as={Col} sm={4} className="mb-2">
                     <Form.Select
-                      className={"people-select " + ((index >= people.length || people[index] === 0 || people[index] === undefined) ? "bg-white" : "bg-green")}
-                      onChange={event => onChangePeople(event, index)}
+                      className={"people-select " + ((index >= props.info.people.length || props.info.people[index] == 0 || props.info.people[index] === undefined) ? "bg-white" : "bg-green")}
+                      onChange={event => {
+                        let people = props.info.people
+                        people[index] = event.target.value
+                        props.setInfo('people', people)
+                        updatePeopleSum()
+                      }}
                       defaultValue={props.info.people[index]}
                     >
                       {
@@ -193,8 +138,8 @@ const InfoForm = (props) => {
             <Form.Control
               type="text"
               id="name-control"
-              className={"name-control " + (name === "" ? "bg-white" : "bg-green")}
-              onChange={event => onChangeName(event)}
+              className={"name-control " + (props.info.name === "" ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('name', event.target.value)}
               placeholder="name"
               defaultValue={props.info.name}
             />
@@ -203,8 +148,8 @@ const InfoForm = (props) => {
             <Form.Control
               type="text"
               id="furigana-control"
-              className={"furigana-control " + (furigana === "" ? "bg-white" : "bg-green")}
-              onChange={event => onChangeFurigana(event)}
+              className={"furigana-control " + (props.info.furigana === "" ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('furigana', event.target.value)}
               placeholder="furigana"
               defaultValue={props.info.furigana}
             />
@@ -212,8 +157,8 @@ const InfoForm = (props) => {
           <FloatingLabel label="お住まいの都道府県" className="mb-2">
             <Form.Select
               id="prefecture-select"
-              className={"prefecture-select " + (prefecture === 0 ? "bg-white" : "bg-green")}
-              onChange={event => onChangePreference(event)}
+              className={"prefecture-select " + (props.info.prefecture == 0 ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('prefecture', event.target.value)}
               placeholder="prefecture"
               defaultValue={props.info.prefecture}
             >
@@ -228,8 +173,8 @@ const InfoForm = (props) => {
             <Form.Control
               id="tel-control"
               type="tel"
-              className={"tel-control " + (tel === "" ? "bg-white" : "bg-green")}
-              onChange={event => onChangeTel(event)}
+              className={"tel-control " + (props.info.tel === "" ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('tel', event.target.value)}
               placeholder="tel"
               defaultValue={props.info.tel}
             />
@@ -238,8 +183,8 @@ const InfoForm = (props) => {
             <Form.Control
               id="email-control"
               type="email"
-              className={"email-control " + (email === "" ? "bg-white" : "bg-green")}
-              onChange={event => onChangeEmail(event)}
+              className={"email-control " + (props.info.email === "" ? "bg-white" : "bg-green")}
+              onChange={event => props.setInfo('email', event.target.value)}
               placeholder="email"
               defaultValue={props.info.email}
             />
@@ -250,7 +195,7 @@ const InfoForm = (props) => {
               variant="primary"
               size="lg"
               onClick={onSubmit}
-              disabled={time === 0 || peopleSum === 0 || name === "" || furigana === "" || prefecture === 0 || tel === "" || email === "" || getIsPeopleOver() || getIsOnlyChild()}
+              disabled={props.info.time == 0 || peopleSum === 0 || props.info.name === "" || props.info.furigana === "" || props.info.prefecture == 0 || props.info.tel === "" || props.info.email === "" || getIsPeopleOver() || getIsOnlyChild()}
               >
               確認画面へ
             </Button>
@@ -268,7 +213,7 @@ const InfoForm = (props) => {
         </Form>
       </Container>
     </>
-  );
+  )
 }
 
-export default InfoForm;
+export default InfoForm

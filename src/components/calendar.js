@@ -8,11 +8,12 @@ const Calendar = (props) => {
   const handleEventClick = useCallback((arg) => {
     if(arg.event.title === '空')
     {
-      let date = new Date();
+      let date = new Date()
       if(arg.event.start != null) {
         date = arg.event.start
       }
-      props.selectDate(date)
+      props.setInfo('date', date)
+      props.setPage('infoform')
     }
   }, [])
   
@@ -35,10 +36,9 @@ const Calendar = (props) => {
       },  
     ]
 
-    let vacantInfo = vacantTypes[code]
-    if(vacantInfo) vacantInfo.start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
-
-    return vacantInfo
+    if(vacantTypes[code]) 
+      vacantTypes[code].start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
+    return vacantTypes[code]
   }
 
   // 仮のランダムな予約
@@ -68,7 +68,7 @@ const Calendar = (props) => {
         dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace("日", ""))}
       />
     </>
-  );
+  )
 }
 
 export default Calendar
