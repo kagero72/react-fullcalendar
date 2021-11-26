@@ -1,7 +1,7 @@
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import allLocales from '@fullcalendar/core/locales-all';
-import React, { useCallback } from "react";
+import React, { useCallback } from 'react';
 
 const Calendar = (props) => {
   
@@ -59,13 +59,13 @@ const Calendar = (props) => {
       <FullCalendar
         plugins={[dayGridPlugin]}
         locales={allLocales}
-        locale="ja"
+        locale='ja'
         timeZone='Asia/Tokyo'
         headerToolbar={{ end: 'prev,today,next' }}
         buttonText={{ today: '今月' }}
         events={reservations}
         eventClick={handleEventClick}
-        dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace("日", ""))}
+        dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace('日', ''))}
       />
     </>
   )
