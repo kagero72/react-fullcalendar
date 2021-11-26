@@ -97,12 +97,12 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<Calendar setInfo={SetInfo} setPage={SetPage}></Calendar>}
+          element={<Calendar info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={setInfo} setPage={SetPage}></Calendar>}
         />
-        <Route
+        {/* <Route
           path='/infoform'
           element={<InfoForm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={setInfo} setPage={SetPage}></InfoForm>}
-        />
+        /> */}
         <Route
           path='/confirm'
           element={<Confirm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>}

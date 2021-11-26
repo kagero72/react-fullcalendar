@@ -29,7 +29,7 @@ const Confirm = (props) => {
         <br/>
         <ButtonGroup>
           <Button variant='primary' size='lg' onClick={onSubmit}>確認</Button>
-          <Button variant='secondary' size='lg' onClick={()=>props.setPage('infoform')}>変更</Button>
+          <Button variant='secondary' size='lg' onClick={()=>props.setPage('')}>変更</Button>
         </ButtonGroup>
       </Container>
     </>

@@ -1,9 +1,14 @@
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import allLocales from '@fullcalendar/core/locales-all';
-import React, { useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
+import { Button, Modal } from 'react-bootstrap';
+import InfoForm from './infoform';
+
 
 const Calendar = (props) => {
+
+  const [modalShow, setModalShow] = useState(false);
   
   const handleEventClick = useCallback((arg) => {
     if(arg.event.title === '空')
@@ -13,7 +18,8 @@ const Calendar = (props) => {
         date = arg.event.start
       }
       props.setInfo('date', date)
-      props.setPage('infoform')
+      // props.setPage('infoform')
+      setModalShow(true)
     }
   }, [])
   
@@ -67,6 +73,24 @@ const Calendar = (props) => {
         eventClick={handleEventClick}
         dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace('日', ''))}
       />
+      <>
+        <Modal
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              入力フォーム
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <InfoForm {...props}/>
+          </Modal.Body>
+        </Modal>
+      </>
     </>
   )
 }

@@ -62,17 +62,8 @@ const InfoForm = (props) => {
   return(
     <>
       <Container>
-        <Button
-         className='back-button'
-         variant='outline-secondary'
-         size='sm'
-         onClick={()=>props.setPage('')}
-        >
-          日付選択へ
-        </Button>
-
         <Form>
-          <Form.Label className='mt-3 mb-2'>
+          <Form.Label className='mb-2'>
             時間
           </Form.Label><br/>
           <>
@@ -101,7 +92,7 @@ const InfoForm = (props) => {
             {
               props.ageList.map((value, index) =>
                 <>
-                  <FloatingLabel key={index} label={value} as={Col} sm={4} className='mb-2'>
+                  <FloatingLabel key={index} label={value} as={Col} sm={6} className='mb-2'>
                     <Form.Select
                       className={'people-select ' + ((index >= props.info.people.length || props.info.people[index] == 0 || props.info.people[index] === undefined) ? 'bg-white' : 'bg-green')}
                       onChange={event => {
@@ -217,3 +208,4 @@ const InfoForm = (props) => {
 }
 
 export default InfoForm
+
