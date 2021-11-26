@@ -56,7 +56,6 @@ const InfoForm = (props) => {
       }
     )
 
-    // console.log(props.info.people)
     updatePeopleSum()
   }
 
