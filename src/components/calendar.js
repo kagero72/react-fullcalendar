@@ -12,7 +12,8 @@ const Calendar = (props) => {
       if(arg.event.start != null) {
         date = arg.event.start
       }
-      props.selectDate(date)
+      props.setInfo('date', date)
+      props.setPage('infoform')
     }
   }, [])
   
@@ -35,10 +36,9 @@ const Calendar = (props) => {
       },  
     ]
 
-    let vacantInfo = vacantTypes[code]
-    if(vacantInfo) vacantInfo.start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
-
-    return vacantInfo
+    if(vacantTypes[code]) 
+      vacantTypes[code].start = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
+    return vacantTypes[code]
   }
 
   // 仮のランダムな予約

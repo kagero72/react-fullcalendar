@@ -10,7 +10,7 @@ const Confirm = (props) => {
     <>
       <Container>
         <ListGroup>
-          <ListGroup.Item>日付：　　　　　　{props.date.getFullYear() + "年" + (props.date.getMonth() + 1) + "月" + props.date.getDate() + "日"}</ListGroup.Item>
+          <ListGroup.Item>日付：　　　　　　{props.info.date.getFullYear() + "年" + (props.info.date.getMonth() + 1) + "月" + props.info.date.getDate() + "日"}</ListGroup.Item>
           <ListGroup.Item>時間：　　　　　　{props.timeZoneList[props.info.time]}</ListGroup.Item>
           <ListGroup.Item>人数：　　　　　　
             {
