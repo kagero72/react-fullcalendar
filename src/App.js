@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css"
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import React, { useState } from "react";
@@ -10,7 +10,7 @@ import Confirm from "./components/confirm";
 
 function App() {
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const [info, setInfo] = useState({
     date: new Date(),
@@ -109,7 +109,7 @@ function App() {
         />
       </Routes>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

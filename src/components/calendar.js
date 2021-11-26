@@ -8,7 +8,7 @@ const Calendar = (props) => {
   const handleEventClick = useCallback((arg) => {
     if(arg.event.title === '空')
     {
-      let date = new Date();
+      let date = new Date()
       if(arg.event.start != null) {
         date = arg.event.start
       }
@@ -68,7 +68,7 @@ const Calendar = (props) => {
         dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace("日", ""))}
       />
     </>
-  );
+  )
 }
 
 export default Calendar

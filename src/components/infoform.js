@@ -7,7 +7,7 @@ const InfoForm = (props) => {
 
   useEffect(() => {
     updatePeopleSum()
-  }, [props.info.people]);
+  }, [props.info.people])
   
   const updatePeopleSum = () => {
     let sum = 0
@@ -213,7 +213,7 @@ const InfoForm = (props) => {
         </Form>
       </Container>
     </>
-  );
+  )
 }
 
-export default InfoForm;
+export default InfoForm
