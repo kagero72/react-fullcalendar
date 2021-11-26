@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, ButtonGroup, Container, Row, Col, Form, FloatingLabel, FormControl } from 'react-bootstrap';
 
 const InfoForm = (props) => {
@@ -12,7 +12,16 @@ const InfoForm = (props) => {
   const [tel, setTel] = useState("")
   const [email, setEmail] = useState("")
 
-  // const time = () => { return Number(document.getElementById("time-select").value) }
+  useEffect(() => {
+    setTime(props.info.time)
+    setPeople(props.info.people)
+    setPeopleSum(props.info.peopleSum)
+    setPrefecture(props.info.prefecture)
+    setName(props.info.name)
+    setFurigana(props.info.furigana)
+    setTel(props.info.tel)
+    setEmail(props.info.email)
+  }, []);
   
   const onChangeTime = (event) => {
     const value = event.target.value
