@@ -5,7 +5,6 @@ import React, { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 import Calendar from './components/calendar';
-import InfoForm from './components/infoform';
 import Confirm from './components/confirm';
 
 function App() {
@@ -21,7 +20,7 @@ function App() {
     furigana: '',
     tel: '',
     email: ''
-  })
+  }, [])
 
   const timeZoneList = [
     '選択してください',
@@ -88,6 +87,10 @@ function App() {
     setInfo({ ...info, [item]: value })
   }
 
+  const SetAllInfo = (info) => {
+    setInfo(info)
+  }
+
   const SetPage = (page) => {
     navigate('/' + page)
   }
@@ -97,12 +100,8 @@ function App() {
       <Routes>
         <Route
           path='/'
-          element={<Calendar info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={setInfo} setPage={SetPage}></Calendar>}
+          element={<Calendar info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={SetAllInfo} setPage={SetPage}></Calendar>}
         />
-        {/* <Route
-          path='/infoform'
-          element={<InfoForm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={setInfo} setPage={SetPage}></InfoForm>}
-        /> */}
         <Route
           path='/confirm'
           element={<Confirm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage}></Confirm>}

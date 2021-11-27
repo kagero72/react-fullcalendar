@@ -10,18 +10,19 @@ const Calendar = (props) => {
 
   const [modalShow, setModalShow] = useState(false);
   
-  const handleEventClick = useCallback((arg) => {
+  const handleEventClick = (arg) => {
     if(arg.event.title === '空')
     {
+      // モーダルを表示
+      setModalShow(true)
+      // 日付を更新
       let date = new Date()
       if(arg.event.start != null) {
         date = arg.event.start
       }
       props.setInfo('date', date)
-      // props.setPage('infoform')
-      setModalShow(true)
     }
-  }, [])
+  }
   
   const getVacantInfo = (code, date) => {
     let vacantTypes = [
@@ -88,6 +89,7 @@ const Calendar = (props) => {
           </Modal.Header>
           <Modal.Body>
             <InfoForm {...props}/>
+            {/* <InfoForm info={props.info} timeZoneList={props.timeZoneList} ageList={props.ageList} prefectureList={props.prefectureList} setInfo={props.setInfo} setAllInfo={props.setAllInfo} setPage={props.setPage}/> */}
           </Modal.Body>
         </Modal>
       </>
