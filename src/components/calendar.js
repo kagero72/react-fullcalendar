@@ -19,9 +19,10 @@ const Calendar = (props) => {
       let date = new Date()
       if(arg.event.start != null) {
         date = arg.event.start
+        console.log(arg.event.start)
+        props.setInfo('time', '')
+        props.setInfo('date', date)
       }
-      props.setInfo('date', date)
-      props.setInfo('time', '')
     }
   }
   

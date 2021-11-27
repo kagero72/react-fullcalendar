@@ -25,6 +25,10 @@ const InfoForm = (props) => {
     && (props.info.people[1] <= 0 || props.info.people[1] === undefined)
   }
 
+  const getIsNotEnoughVacant = () => {
+    return peopleSum > props.vacantList[props.getFormattedDate(props.info.date)].zones[props.info.time]
+  }
+
   const onSubmit = () => {
     props.setPage('confirm')
   }
@@ -34,10 +38,10 @@ const InfoForm = (props) => {
     // リセット確認
     if(!window.confirm('本当に入力内容をリセットしますか？')) return
 
-    // フォーム内の値をリセッ
+    // フォーム内の値をリセット
 
     // document.getElementById('time-select').value = 0
-    // document.getElementById('time-radio-default').value = true
+    document.getElementById('time-radio-default').checked = true
 
     const peopleSelectList = document.getElementsByClassName('people-select')
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
@@ -47,6 +51,7 @@ const InfoForm = (props) => {
     document.getElementById('tel-control').value = ''
     document.getElementById('email-control').value = ''
 
+    // 変数の値をリセット
     props.setAllInfo({
       date: props.info.date,
       time: '',
@@ -100,7 +105,7 @@ const InfoForm = (props) => {
           </FloatingLabel> */}
 
           <br/>
-          {/* <Form.Check
+          <Form.Check
             inline
             id='time-radio-default'
             className='time-radio'
@@ -108,8 +113,8 @@ const InfoForm = (props) => {
             name='group1'
             type='radio'
             onChange={event => props.setInfo('time', '')}
-            defaultValue={props.info.time == ''}
-          /> */}
+            defaultChecked={true}
+          />
           {
             Object.keys(props.vacantList[props.getFormattedDate(props.info.date)].zones).map((key) =>
               <Form.Check
@@ -125,7 +130,6 @@ const InfoForm = (props) => {
               value={key}
               disabled={props.vacantList[props.getFormattedDate(props.info.date)].zones[key] == 0}
               onChange={event => {props.setInfo('time', event.target.value); console.log(event)}}
-              defaultValue={props.info.time == key ? true : false}
               />
             )
           }
@@ -161,6 +165,7 @@ const InfoForm = (props) => {
               合計：{peopleSum}名
               {getIsPeopleOver() && <><br/><strong className='tc-r'>20名様以上のご予約はお電話にてお願いいたします。</strong></>}
               {getIsOnlyChild() && <><br/><strong className='tc-r'>中学生未満のお子様のみでのご来園は、お断りさせていただいております。</strong></>}
+              {getIsNotEnoughVacant() && <><br/><strong className='tc-r'>その時間帯には空き人数が足りません。</strong></>}
             </div>
           }
 
@@ -229,7 +234,11 @@ const InfoForm = (props) => {
               variant='primary'
               size='lg'
               onClick={onSubmit}
-              disabled={props.info.time == 0 || peopleSum === 0 || props.info.name === '' || props.info.furigana === '' || props.info.prefecture == 0 || props.info.tel === '' || props.info.email === '' || getIsPeopleOver() || getIsOnlyChild()}
+              disabled={
+                props.info.time == 0 || peopleSum === 0 || props.info.name === '' || props.info.furigana === '' || 
+                props.info.prefecture == 0 || props.info.tel === '' || props.info.email === '' || 
+                getIsPeopleOver() || getIsOnlyChild() || getIsNotEnoughVacant()
+              }
               >
               確認画面へ
             </Button>
