@@ -21,6 +21,7 @@ const Calendar = (props) => {
         date = arg.event.start
       }
       props.setInfo('date', date)
+      props.setInfo('time', '')
     }
   }
   

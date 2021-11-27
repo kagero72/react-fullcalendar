@@ -35,12 +35,9 @@ const InfoForm = (props) => {
     if(!window.confirm('本当に入力内容をリセットしますか？')) return
 
     // フォーム内の値をリセッ
-    
-    // document.getElementById('time-select').value = 0
 
-    console.log(document.getElementById('time-radio-default').value)
-    document.getElementById('time-radio-default').value = true
-    console.log(document.getElementById('time-radio-default').value)
+    // document.getElementById('time-select').value = 0
+    // document.getElementById('time-radio-default').value = true
 
     const peopleSelectList = document.getElementsByClassName('people-select')
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
@@ -78,6 +75,7 @@ const InfoForm = (props) => {
           <>
             {props.info.date.getFullYear() + '年' + (props.info.date.getMonth() + 1) + '月' + props.info.date.getDate() + '日'}
           </>
+
           {/* <FloatingLabel label='時間帯' className='mb-2'>
             <Form.Select
               id='time-select'
@@ -88,11 +86,11 @@ const InfoForm = (props) => {
             >
               <option key={0} value=''>選択してください</option>
               {
-                Object.keys(props.timeZoneList[props.getFormattedDate(props.info.date)].zones).map((value, index) =>
-                  <option key={index} value={value}>
+                Object.keys(props.vacantList[props.getFormattedDate(props.info.date)].zones).map((key) =>
+                  <option key={key} value={key}>
                     {
-                      value + ' （空き' +
-                      Object.values(props.timeZoneList[props.getFormattedDate(props.info.date)].zones)[index] +
+                      props.timeZoneList[key] + ' （空き' +
+                      props.vacantList[props.getFormattedDate(props.info.date)].zones[key] +
                       '名）'
                     }
                   </option>
@@ -102,7 +100,7 @@ const InfoForm = (props) => {
           </FloatingLabel> */}
 
           <br/>
-          <Form.Check
+          {/* <Form.Check
             inline
             id='time-radio-default'
             className='time-radio'
@@ -111,7 +109,7 @@ const InfoForm = (props) => {
             type='radio'
             onChange={event => props.setInfo('time', '')}
             defaultValue={props.info.time == ''}
-          />
+          /> */}
           {
             Object.keys(props.vacantList[props.getFormattedDate(props.info.date)].zones).map((key) =>
               <Form.Check
