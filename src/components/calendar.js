@@ -1,7 +1,7 @@
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import allLocales from '@fullcalendar/core/locales-all';
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import InfoForm from './infoform';
 
@@ -15,15 +15,16 @@ const Calendar = (props) => {
     {
       // モーダルを表示
       setModalShow(true)
-      // 日付を更新
-      let date = new Date()
-      if(arg.event.start != null) {
-        date = arg.event.start
-        console.log(arg.event.start)
-        props.setInfo('time', '')
-        props.setInfo('date', date)
-      }
     }
+
+    // 日付を更新
+    let date = new Date()
+    if(arg.event.start != null) {
+      date = arg.event.start
+    }
+    props.setInfo('time', '')
+    props.setInfo('date', date)
+    
   }
   
   const getVacantInfo = (code, date) => {

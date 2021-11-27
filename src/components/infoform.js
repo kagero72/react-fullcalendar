@@ -21,8 +21,8 @@ const InfoForm = (props) => {
 
   const getIsOnlyChild = () => {
     return peopleSum > 0
-    && (props.info.people[0] <= 0 || props.info.people[0] === undefined)
     && (props.info.people[1] <= 0 || props.info.people[1] === undefined)
+    && (props.info.people[2] <= 0 || props.info.people[2] === undefined)
   }
 
   const getIsNotEnoughVacant = () => {
@@ -40,8 +40,10 @@ const InfoForm = (props) => {
 
     // フォーム内の値をリセット
 
-    // document.getElementById('time-select').value = 0
-    document.getElementById('time-radio-default').checked = true
+    // セレクトの場合
+    document.getElementById('time-select').value = 0
+    // ラジオボタンの場合
+    // document.getElementById('time-radio-default').checked = true
 
     const peopleSelectList = document.getElementsByClassName('people-select')
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
@@ -68,7 +70,7 @@ const InfoForm = (props) => {
     updatePeopleSum()
   }
 
-  console.log(props.info)
+  // console.log(props.info)
 
   return(
     <>
@@ -81,7 +83,7 @@ const InfoForm = (props) => {
             {props.info.date.getFullYear() + '年' + (props.info.date.getMonth() + 1) + '月' + props.info.date.getDate() + '日'}
           </>
 
-          {/* <FloatingLabel label='時間帯' className='mb-2'>
+          <FloatingLabel label='時間帯' className='mb-2'>
             <Form.Select
               id='time-select'
               className={'time-select ' + (props.info.time == 0 ? 'bg-white' : 'bg-green')}
@@ -101,10 +103,10 @@ const InfoForm = (props) => {
                   </option>
                 )
               }
-            </Form.Select>              
-          </FloatingLabel> */}
+            </Form.Select>
+          </FloatingLabel>
 
-          <br/>
+          {/* <br/>
           <Form.Check
             inline
             id='time-radio-default'
@@ -133,7 +135,7 @@ const InfoForm = (props) => {
               />
             )
           }
-          <br/>
+          <br/> */}
 
           <Form.Label className='mt-3 mb-2'>
             人数

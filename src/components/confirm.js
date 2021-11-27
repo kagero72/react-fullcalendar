@@ -3,7 +3,9 @@ import { Container, Button, ButtonGroup, ListGroup } from 'react-bootstrap';
 const Confirm = (props) => {
 
   const onSubmit = () => {
-
+    // axios.post('/api/post/create', props.info).then(res => {
+    //   console.log(res)
+    // }).catch(err => console.log(err))
   }
 
   return(
