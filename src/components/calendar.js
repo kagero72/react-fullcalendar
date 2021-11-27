@@ -2,7 +2,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import allLocales from '@fullcalendar/core/locales-all';
 import React, { useState, useCallback } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import InfoForm from './infoform';
 
 
@@ -48,17 +48,14 @@ const Calendar = (props) => {
     return vacantTypes[code]
   }
 
-  // 仮のランダムな予約
-  let vacancyCodes = []
-  for(let i = 0; i < 180; i++){
-    let r = Math.floor( Math.random() * 3)
-    vacancyCodes.push(r)
-  }
   let reservations = []
   for(let i = 0; i < 180; i++){
-    let day = new Date()
-    day.setDate( day.getDate() + 1 + i)
-    reservations.push(getVacantInfo(vacancyCodes[i], day))
+    let date = new Date()
+    date.setDate(date.getDate() + 1 + i)
+    const dateStr = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2)
+    const dateData = props.vacantList[dateStr]
+    let code = (dateData) ? ((dateData.vacant == '空きあり') ? 0 : 1) : 2
+    reservations.push(getVacantInfo(code, date))
   }
 
   return(
@@ -78,12 +75,12 @@ const Calendar = (props) => {
         <Modal
           show={modalShow}
           onHide={() => setModalShow(false)}
-          size="lg"
-          aria-labelledby="contained-modal-title-vcenter"
+          size='lg'
+          aria-labelledby='contained-modal-title-vcenter'
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title-vcenter">
+            <Modal.Title id='contained-modal-title-vcenter'>
               入力フォーム
             </Modal.Title>
           </Modal.Header>

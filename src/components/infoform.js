@@ -21,8 +21,8 @@ const InfoForm = (props) => {
 
   const getIsOnlyChild = () => {
     return peopleSum > 0
-    && (props.info.people[0] == 0 || props.info.people[0] === undefined)
-    && (props.info.people[1] == 0 || props.info.people[1] === undefined)
+    && (props.info.people[0] <= 0 || props.info.people[0] === undefined)
+    && (props.info.people[1] <= 0 || props.info.people[1] === undefined)
   }
 
   const onSubmit = () => {
@@ -34,21 +34,28 @@ const InfoForm = (props) => {
     // リセット確認
     if(!window.confirm('本当に入力内容をリセットしますか？')) return
 
-    // フォーム内の値をリセット
-    document.getElementById('time-select').value = 0
+    // フォーム内の値をリセッ
+    
+    // document.getElementById('time-select').value = 0
+
+    console.log(document.getElementById('time-radio-default').value)
+    document.getElementById('time-radio-default').value = true
+    console.log(document.getElementById('time-radio-default').value)
+
     const peopleSelectList = document.getElementsByClassName('people-select')
     for(let i = 0; i < peopleSelectList.length; i++) peopleSelectList[i].value = 0
     document.getElementById('name-control').value = ''
     document.getElementById('furigana-control').value = ''
-    document.getElementById('prefecture-select').value = 0
+    document.getElementById('prefecture-select').value = ''
     document.getElementById('tel-control').value = ''
     document.getElementById('email-control').value = ''
 
     props.setAllInfo({
-      date: new Date(),
-      time: 0,
+      date: props.info.date,
+      time: '',
+      timeStr: '',
       people: [],
-      prefecture: 0,
+      prefecture: '',
       name: '',
       furigana: '',
       tel: '',
@@ -58,6 +65,8 @@ const InfoForm = (props) => {
 
     updatePeopleSum()
   }
+
+  console.log(props.info)
 
   return(
     <>
@@ -69,46 +78,81 @@ const InfoForm = (props) => {
           <>
             {props.info.date.getFullYear() + '年' + (props.info.date.getMonth() + 1) + '月' + props.info.date.getDate() + '日'}
           </>
-          <FloatingLabel label='時間帯' className='mb-2'>
+          {/* <FloatingLabel label='時間帯' className='mb-2'>
             <Form.Select
               id='time-select'
               className={'time-select ' + (props.info.time == 0 ? 'bg-white' : 'bg-green')}
-              onChange={event => props.setInfo('time', event.target.value)}
+              onChange={event => {props.setInfo('time', event.target.value)}}
               placeholder='time'
               defaultValue={props.info.time}
             >
+              <option key={0} value=''>選択してください</option>
               {
-                props.timeZoneList.map((value, index) =>
-                  <option key={index} value={index}>{value}</option>
+                Object.keys(props.timeZoneList[props.getFormattedDate(props.info.date)].zones).map((value, index) =>
+                  <option key={index} value={value}>
+                    {
+                      value + ' （空き' +
+                      Object.values(props.timeZoneList[props.getFormattedDate(props.info.date)].zones)[index] +
+                      '名）'
+                    }
+                  </option>
                 )
               }
             </Form.Select>              
-          </FloatingLabel>
+          </FloatingLabel> */}
+
+          <br/>
+          <Form.Check
+            inline
+            id='time-radio-default'
+            className='time-radio'
+            label='-選択してください-　　　　　　'
+            name='group1'
+            type='radio'
+            onChange={event => props.setInfo('time', '')}
+            defaultValue={props.info.time == ''}
+          />
+          {
+            Object.keys(props.vacantList[props.getFormattedDate(props.info.date)].zones).map((key) =>
+              <Form.Check
+              inline
+              className={'time-radio ' + ((props.info.time == 0 || props.info.time != key) ? 'bg-white' : 'bg-green')}
+              label={
+                props.timeZoneList[key] + ' （空き' +
+                props.vacantList[props.getFormattedDate(props.info.date)].zones[key] +
+                '名）'
+              }
+              name='group1'
+              type='radio'
+              value={key}
+              disabled={props.vacantList[props.getFormattedDate(props.info.date)].zones[key] == 0}
+              onChange={event => {props.setInfo('time', event.target.value); console.log(event)}}
+              defaultValue={props.info.time == key ? true : false}
+              />
+            )
+          }
+          <br/>
 
           <Form.Label className='mt-3 mb-2'>
             人数
           </Form.Label>
           <Row>
             {
-              props.ageList.map((value, index) =>
+              Object.keys(props.ageList).map((key) =>
                 <>
-                  <FloatingLabel key={index} label={value} as={Col} sm={6} className='mb-2'>
-                    <Form.Select
-                      className={'people-select ' + ((index >= props.info.people.length || props.info.people[index] == 0 || props.info.people[index] === undefined) ? 'bg-white' : 'bg-green')}
+                  <FloatingLabel key={key} label={props.ageList[key]} as={Col} sm={6} className='mb-2'>
+                    <Form.Control
+                      type='number'
+                      className={'people-select ' + ((key >= props.info.people.length || props.info.people[key] <= 0 || props.info.people[key] === undefined) ? 'bg-white' : 'bg-green')}
                       onChange={event => {
                         let people = props.info.people
-                        people[index] = event.target.value
+                        if (event.target.value >= 0) { people[key] = event.target.value }
+                        else { event.target.value = 0 }
                         props.setInfo('people', people)
                         updatePeopleSum()
                       }}
-                      defaultValue={props.info.people[index]}
-                    >
-                      {
-                        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].map((num, index) =>
-                          <option key={index} value={num}>{num}</option>
-                        )
-                      }
-                    </Form.Select>
+                      defaultValue={props.info.people[key] || 0}
+                    />
                   </FloatingLabel>
                 </>
               )
@@ -148,14 +192,15 @@ const InfoForm = (props) => {
           <FloatingLabel label='お住まいの都道府県' className='mb-2'>
             <Form.Select
               id='prefecture-select'
-              className={'prefecture-select ' + (props.info.prefecture == 0 ? 'bg-white' : 'bg-green')}
-              onChange={event => props.setInfo('prefecture', event.target.value)}
+              className={'prefecture-select ' + (props.info.prefecture === '' ? 'bg-white' : 'bg-green')}
+              onChange={event => props.setInfo('prefecture', event.target.value) }
               placeholder='prefecture'
               defaultValue={props.info.prefecture}
             >
+              <option key={0} value={''}>選択してください</option>
               {
-                props.prefectureList.map((value, index) =>
-                  <option key={index} value={index}>{value}</option>
+                Object.keys(props.prefectureList).map((key) =>
+                  <option key={key} value={key}>{props.prefectureList[key]}</option>
                 )
               }
             </Form.Select>

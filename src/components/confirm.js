@@ -11,12 +11,12 @@ const Confirm = (props) => {
       <Container>
         <ListGroup>
           <ListGroup.Item>日付：　　　　　　{props.info.date.getFullYear() + '年' + (props.info.date.getMonth() + 1) + '月' + props.info.date.getDate() + '日'}</ListGroup.Item>
-          <ListGroup.Item>時間：　　　　　　{props.timeZoneList[props.info.time]}</ListGroup.Item>
+          <ListGroup.Item>時間帯：　　　　　{props.timeZoneList[props.info.time]}</ListGroup.Item>
           <ListGroup.Item>人数：　　　　　　
             {
-              props.ageList.map((value, index) => 
-                (index < props.info.people.length && props.info.people[index] !== 0 && props.info.people[index] !== undefined) &&
-                <>{value} {props.info.people[index]}名　</>
+              Object.keys(props.ageList).map((key) => 
+                (key < props.info.people.length && props.info.people[key] !== 0 && props.info.people[key] !== undefined) &&
+                <>{props.ageList[key]} {props.info.people[key]}名　</>
               )
             }
           </ListGroup.Item>
