@@ -70,8 +70,6 @@ const InfoForm = (props) => {
     updatePeopleSum()
   }
 
-  // console.log(props.info)
-
   return(
     <>
       <Container>

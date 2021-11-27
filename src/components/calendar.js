@@ -74,25 +74,23 @@ const Calendar = (props) => {
         eventClick={handleEventClick}
         dayCellContent={(event) => (event.dayNumberText = event.dayNumberText.replace('日', ''))}
       />
-      <>
-        <Modal
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-          size='lg'
-          aria-labelledby='contained-modal-title-vcenter'
-          centered
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id='contained-modal-title-vcenter'>
-              入力フォーム
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <InfoForm {...props}/>
-            {/* <InfoForm info={props.info} timeZoneList={props.timeZoneList} ageList={props.ageList} prefectureList={props.prefectureList} setInfo={props.setInfo} setAllInfo={props.setAllInfo} setPage={props.setPage}/> */}
-          </Modal.Body>
-        </Modal>
-      </>
+      <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size='lg'
+        aria-labelledby='contained-modal-title-vcenter'
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id='contained-modal-title-vcenter'>
+            入力フォーム
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <InfoForm {...props}/>
+          {/* <InfoForm info={props.info} timeZoneList={props.timeZoneList} ageList={props.ageList} prefectureList={props.prefectureList} setInfo={props.setInfo} setAllInfo={props.setAllInfo} setPage={props.setPage}/> */}
+        </Modal.Body>
+      </Modal>
     </>
   )
 }
