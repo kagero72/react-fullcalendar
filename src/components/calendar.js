@@ -24,7 +24,6 @@ const Calendar = (props) => {
     }
     props.setInfo('time', '')
     props.setInfo('date', date)
-    
   }
   
   const getVacantInfo = (code, date) => {

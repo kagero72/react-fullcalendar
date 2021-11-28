@@ -12,7 +12,7 @@ function App() {
   const navigate = useNavigate()
 
   const [info, setInfo] = useState({
-    date: new Date(),
+    date: new Date('2000-01-01'),
     time: '',
     people: [],
     prefecture: '',
@@ -23,6 +23,10 @@ function App() {
   }, [])
 
   const [vacantList, setVacantList] = useState({
+    '2000-01-01': {
+      'vacant': '空きあり',
+      'zones': {}
+    },
     '2021-11-27': {
       'vacant': '空きあり',
       'zones': {
@@ -37,22 +41,6 @@ function App() {
         '9': 30,
         '10': 30,
         '11': 30
-      }
-    },
-    '2021-11-28': {
-      'vacant': '空きあり',
-      'zones': {
-        '1': 50,
-        '2': 30,
-        '3': 50,
-        '4': 5,
-        '5': 20,
-        '6': 50,
-        '7': 0,
-        '8': 50,
-        '9': 50,
-        '10': 50,
-        '11': 50
       }
     },
     '2021-11-29': {
