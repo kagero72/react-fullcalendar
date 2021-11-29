@@ -35,6 +35,7 @@ const InfoForm = (props) => {
 
   const onSubmit = () => {
     props.setPage('confirm')
+    props.setModalShow(false)
   }
 
   const onReset = () => {

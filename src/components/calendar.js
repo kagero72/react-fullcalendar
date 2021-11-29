@@ -86,7 +86,7 @@ const Calendar = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <InfoForm {...props}/>
+          <InfoForm {...props} setModalShow={setModalShow}/>
           {/* <InfoForm info={props.info} timeZoneList={props.timeZoneList} ageList={props.ageList} prefectureList={props.prefectureList} setInfo={props.setInfo} setAllInfo={props.setAllInfo} setPage={props.setPage}/> */}
         </Modal.Body>
       </Modal>

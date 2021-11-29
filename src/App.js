@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Calendar from './components/calendar';
 import Confirm from './components/confirm';
@@ -21,6 +21,8 @@ function App() {
     tel: '',
     email: ''
   }, [])
+
+  const [page, setPage] = useState('')
 
   const [vacantList, setVacantList] = useState({
     '2000-01-01': {
@@ -176,21 +178,17 @@ function App() {
   }
 
   const SetPage = (page) => {
-    navigate('/' + page)
+    setPage(page)
   }
 
   return (
     <>
-      <Routes>
-        <Route
-          path='/'
-          element={<Calendar info={info} vacantList={vacantList} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={SetAllInfo} setPage={SetPage} getFormattedDate={getFormattedDate}></Calendar>}
-        />
-        <Route
-          path='/confirm'
-          element={<Confirm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} getFormattedDate={getFormattedDate}></Confirm>}
-        />
-      </Routes>
+      <div className={page === '' ? "block" : "none"}>
+        <Calendar info={info} vacantList={vacantList} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setInfo={SetInfo} setAllInfo={SetAllInfo} setPage={SetPage} getFormattedDate={getFormattedDate}></Calendar>
+      </div>
+      <div className={page === 'confirm' ? "block" : "none"}>
+        <Confirm info={info} timeZoneList={timeZoneList} ageList={ageList} prefectureList={prefectureList} setPage={SetPage} getFormattedDate={getFormattedDate}></Confirm>
+      </div>
     </>
   )
 }
