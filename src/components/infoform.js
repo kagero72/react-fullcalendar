@@ -8,6 +8,10 @@ const InfoForm = (props) => {
   useEffect(() => {
     updatePeopleSum()
   }, [props.info.people])
+
+  useEffect(() => {
+    props.setInfo('time','0')
+  }, [props.info.date])
   
   const updatePeopleSum = () => {
     let sum = 0
@@ -87,7 +91,7 @@ const InfoForm = (props) => {
               className={'time-select ' + (props.info.time == 0 ? 'bg-white' : 'bg-green')}
               onChange={event => {props.setInfo('time', event.target.value)}}
               placeholder='time'
-              defaultValue={props.info.time}
+              defaultValue={'0'}
             >
               <option key={0} value=''>選択してください</option>
               {

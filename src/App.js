@@ -27,7 +27,7 @@ function App() {
       'vacant': '空きあり',
       'zones': {}
     },
-    '2021-11-27': {
+    '2021-11-30': {
       'vacant': '空きあり',
       'zones': {
         '1': 20,
@@ -43,7 +43,7 @@ function App() {
         '11': 30
       }
     },
-    '2021-11-29': {
+    '2021-12-01': {
       'vacant': '空きあり',
       'zones': {
         '1': 50,
@@ -59,7 +59,7 @@ function App() {
         '11': 50
       }
     },
-    '2021-11-30': {
+    '2021-12-02': {
       'vacant': '空きあり',
       'zones': {
         '1': 40,
@@ -169,6 +169,9 @@ function App() {
     
   const SetInfo = (item, value) => {
     setInfo({ ...info, [item]: value })
+    
+    console.log(item + " " + value)
+    console.log(info)
   }
   
   const SetAllInfo = (info) => {
