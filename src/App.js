@@ -169,9 +169,6 @@ function App() {
     
   const SetInfo = (item, value) => {
     setInfo({ ...info, [item]: value })
-    
-    console.log(item + " " + value)
-    console.log(info)
   }
   
   const SetAllInfo = (info) => {
